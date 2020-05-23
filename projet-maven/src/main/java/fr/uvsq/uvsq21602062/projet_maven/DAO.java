@@ -20,11 +20,11 @@ public abstract class DAO<T> {
 	 * Attribut stockant le mdp de l'utilisateur
 	 */
 	protected String password = "1234";
-	
+
 	/**
-	 * Attribut stockant le nom de la bdd
+	 * Attribut stockant l'url de connexion à la bdd
 	 */
-	protected String bddName = "Forme";
+	protected String urlConnexion = "jdbc:mysql://localhost:3306/Forme?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	
 	/**
 	 * Attribut stockant la connexion à la bdd

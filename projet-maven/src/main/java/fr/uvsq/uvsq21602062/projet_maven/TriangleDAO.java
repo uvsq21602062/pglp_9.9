@@ -1,6 +1,9 @@
 package fr.uvsq.uvsq21602062.projet_maven;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Classe héritant de la classe abstraite DAO permettant la gestion des
@@ -15,8 +18,8 @@ public class TriangleDAO extends DAO<Triangle>{
 	 */
 	public TriangleDAO() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.bddName, this.username, this.password);
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			this.conn = DriverManager.getConnection(this.urlConnexion, this.username, this.password);
 			
 		}
 		catch(Exception e) {
@@ -28,20 +31,53 @@ public class TriangleDAO extends DAO<Triangle>{
 	 * Méthode permettant de trouver dans la bdd un triangle
 	 */
 	public Triangle trouverParNom(String nom) {
-		return null;
+		Triangle t = null;
+		try {
+			PreparedStatement p = this.conn.prepareStatement("select * from Triangle where nom = ?");
+			p.setString(1, nom);
+			ResultSet result = p.executeQuery();
+			if(result.first()) {
+				t = new Triangle(result.getInt("longueur"),
+						result.getString("nom"),
+						result.getInt("x"),
+						result.getInt("y"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return t;
 	}
 	
 	/**
 	 * Méthode permettant d'ajouter un triangle dans la bdd
 	 */
 	public void ajouter(Triangle t) {
-		
+		try {
+			PreparedStatement p = this.conn.prepareStatement("insert into Triangle values(?, ?, ?, ?)");
+			p.setString(1, t.getNom());
+			p.setInt(2, t.getLongueur());
+			p.setInt(3, t.getX());
+			p.setInt(4, t.getY());
+			p.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Méthode permettant de modifier dans la bdd un triangle
 	 */
 	public void modifier(Triangle t) {
-		
+		try {
+			PreparedStatement p = this.conn.prepareStatement("update Triangle set x = ?, set y = ? where nom = ?");
+			p.setInt(1, t.getX());
+			p.setInt(2, t.getY());
+			p.setString(3, t.getNom());
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
