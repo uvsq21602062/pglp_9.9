@@ -76,6 +76,7 @@ public class CarreDAO extends DAO<Carre>{
 			p.setInt(1, c.getX());
 			p.setInt(2, c.getY());
 			p.setString(3, c.getNom());
+			p.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

@@ -32,7 +32,7 @@ public class DrawingTUI {
 	 * Interprete la ligne entré par l'utilisateur.
 	 * Cette méthode retourne 0 lorsqu'on quite.
 	 */
-	public int prochaineLigne() {
+	public boolean prochaineLigne() {
 		String saisie = this.scan.nextLine();
 		saisie = saisie.replace(" ", "");
 		saisie = saisie.replaceAll("[(),]", " ");
@@ -159,11 +159,11 @@ public class DrawingTUI {
  		}
  		else if(saisieSeparee[0].equals("quit")) {
  			System.out.println("Au revoir");
- 			return 0;
+ 			return false;
  		}
 		else {
 			System.out.println("Erreur : la chaine entrée n'est pas reconnu.");
 		}
- 		return 1;
+ 		return true;
 	}
 }

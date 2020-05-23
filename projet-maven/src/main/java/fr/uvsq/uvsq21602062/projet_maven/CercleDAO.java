@@ -72,10 +72,11 @@ public class CercleDAO extends DAO<Cercle>{
 	 */
 	public void modifier(Cercle c) {
 		try {
-			PreparedStatement p = this.conn.prepareStatement("update Cercle set x = ?, set y = ? where nom = ?");
+			PreparedStatement p = this.conn.prepareStatement("update Cercle set x = ?, y = ? where nom = ?");
 			p.setInt(1, c.getX());
 			p.setInt(2, c.getY());
 			p.setString(3, c.getNom());
+			p.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

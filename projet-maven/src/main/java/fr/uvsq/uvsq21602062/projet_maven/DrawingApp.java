@@ -12,7 +12,8 @@ public class DrawingApp {
 	 */
 	public static void main(String[] args) {
 		DrawingTUI draw = new DrawingTUI();
-		draw.prochaineLigne();
+		while(draw.prochaineLigne()) {
+		}
 	}
 
 }

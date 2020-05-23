@@ -60,8 +60,8 @@ public class RectangleDAO extends DAO<Rectangle>{
 			p.setString(1, r.getNom());
 			p.setInt(2, r.getLongueur());
 			p.setInt(3, r.getLargeur());
-			p.setInt(3, r.getX());
-			p.setInt(4, r.getY());
+			p.setInt(4, r.getX());
+			p.setInt(5, r.getY());
 			p.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -78,6 +78,7 @@ public class RectangleDAO extends DAO<Rectangle>{
 			p.setInt(1, r.getX());
 			p.setInt(2, r.getY());
 			p.setString(3, r.getNom());
+			p.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
