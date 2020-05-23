@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Classe héritant de la classe abstraite DAO permettant la gestion des
@@ -28,25 +29,25 @@ public class CercleDAO extends DAO<Cercle>{
 	}
 	
 	/**
-	 * Méthode permettant de trouver dans la bdd un cercle
+	 * Méthode permettant de donner tous les cercles dans la bdd
 	 */
-	public Cercle trouverParNom(String nom) {
-		Cercle c = null;
+	public ArrayList<Cercle> toutObtenir() {
+		ArrayList<Cercle> listCercle = new ArrayList<Cercle>();
 		try {
-			PreparedStatement p = this.conn.prepareStatement("select * from Cercle where nom = ?");
-			p.setString(1, nom);
+			PreparedStatement p = this.conn.prepareStatement("select * from Cercle");
 			ResultSet result = p.executeQuery();
-			if(result.first()) {
-				c = new Cercle(result.getInt("rayon"),
+			while(result.next()) {
+				Cercle c = new Cercle(result.getInt("rayon"),
 						result.getString("nom"),
 						result.getInt("x"),
 						result.getInt("y"));
+				listCercle.add(c);
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return listCercle;
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Classe héritant de la classe abstraite DAO permettant la gestion des
@@ -28,25 +29,25 @@ public class TriangleDAO extends DAO<Triangle>{
 	}
 	
 	/**
-	 * Méthode permettant de trouver dans la bdd un triangle
+	 * Méthode permettant d'obtenir tous les Triangle dans la bdd
 	 */
-	public Triangle trouverParNom(String nom) {
-		Triangle t = null;
+	public ArrayList<Triangle> toutObtenir() {
+		ArrayList<Triangle> listTriangle = new ArrayList<Triangle>();
 		try {
-			PreparedStatement p = this.conn.prepareStatement("select * from Triangle where nom = ?");
-			p.setString(1, nom);
+			PreparedStatement p = this.conn.prepareStatement("select * from Triangle");
 			ResultSet result = p.executeQuery();
-			if(result.first()) {
-				t = new Triangle(result.getInt("longueur"),
+			while(result.next()) {
+				Triangle t = new Triangle(result.getInt("longueur"),
 						result.getString("nom"),
 						result.getInt("x"),
 						result.getInt("y"));
+				listTriangle.add(t);
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return t;
+		return listTriangle;
 	}
 	
 	/**

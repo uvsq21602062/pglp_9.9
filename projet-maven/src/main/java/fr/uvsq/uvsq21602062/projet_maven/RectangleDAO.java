@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Classe héritant de la classe abstraite DAO permettant la gestion des
@@ -28,26 +29,26 @@ public class RectangleDAO extends DAO<Rectangle>{
 	}
 	
 	/**
-	 * Méthode permettant de trouver dans la bdd un rectangle
+	 * Méthode permettant d'obtenir tous les Rectangle dans la bdd
 	 */
-	public Rectangle trouverParNom(String nom) {
-		Rectangle r = null;
+	public ArrayList<Rectangle> toutObtenir() {
+		ArrayList<Rectangle> listRectangle = new ArrayList<Rectangle>();
 		try {
-			PreparedStatement p = this.conn.prepareStatement("select * from Rectangle where nom = ?");
-			p.setString(1, nom);
+			PreparedStatement p = this.conn.prepareStatement("select * from Rectangle");
 			ResultSet result = p.executeQuery();
-			if(result.first()) {
-				r = new Rectangle(result.getInt("longueur"),
+			while(result.next()) {
+				Rectangle r = new Rectangle(result.getInt("longueur"),
 						result.getInt("largeur"),
 						result.getString("nom"),
 						result.getInt("x"),
 						result.getInt("y"));
+				listRectangle.add(r);
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return r;
+		return listRectangle;
 	}
 	
 	/**

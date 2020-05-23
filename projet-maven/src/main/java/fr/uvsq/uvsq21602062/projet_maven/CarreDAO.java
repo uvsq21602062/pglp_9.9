@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Classe héritant de la classe abstraite DAO permettant la gestion des
@@ -28,25 +29,25 @@ public class CarreDAO extends DAO<Carre>{
 	}
 	
 	/**
-	 * Méthode permettant de trouver dans la bdd un carre
+	 * Méthode permettant d'obtenir tous les Carrés dans la bdd
 	 */
-	public Carre trouverParNom(String nom) {
-		Carre c = null;
+	public ArrayList<Carre> toutObtenir() {
+		ArrayList<Carre> listCarre = new ArrayList<Carre>();
 		try {
-			PreparedStatement p = this.conn.prepareStatement("select * from Carre where nom = ?");
-			p.setString(1, nom);
+			PreparedStatement p = this.conn.prepareStatement("select * from Carre");
 			ResultSet result = p.executeQuery();
-			if(result.first()) {
-				c = new Carre(result.getInt("longueur"),
+			while(result.next()) {
+				Carre c = new Carre(result.getInt("longueur"),
 						result.getString("nom"),
 						result.getInt("x"),
 						result.getInt("y"));
+				listCarre.add(c);
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return listCarre;
 	}
 	
 	/**

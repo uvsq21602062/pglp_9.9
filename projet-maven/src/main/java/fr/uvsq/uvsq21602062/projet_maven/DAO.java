@@ -1,6 +1,7 @@
 package fr.uvsq.uvsq21602062.projet_maven;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 	
 
@@ -32,9 +33,9 @@ public abstract class DAO<T> {
 	protected Connection conn;
 			
 	/**
-	 * Méthode permettant de trouver dans la bdd une certaine forme
+	 * Méthode permettant de trouver dans la bdd tous les éléments d'une certaine forme
 	 */
-	public abstract T trouverParNom(String nom);
+	public abstract ArrayList<T> toutObtenir();
 	
 	/**
 	 * Méthode permettant d'ajouter une cetaine forme dans la bdd
