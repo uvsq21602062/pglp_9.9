@@ -29,4 +29,11 @@ public class Cercle extends Forme{
 	public int getRayon() {
 		return this.rayon;
 	}
+	
+	/**
+	 * Retourne le cercle sous forme de String
+	 */
+	public String toString() {
+		return "Cercle " + nom + ", rayon = " + this.rayon + ", x = " + this.x +", y = " + this.y;
+	}
 }

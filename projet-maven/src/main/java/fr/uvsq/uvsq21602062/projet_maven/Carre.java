@@ -28,4 +28,11 @@ public class Carre extends Forme {
 	public int getLongueur() {
 		return this.longueur;
 	}
+	
+	/**
+	 * Retourne sous forme de String un Carre
+	 */
+	public String toString() {
+		return "Carre " + this.nom + ", longueur = " + this.longueur + ", x = " + this.x + ", y = " + this.y;
+	}
 }

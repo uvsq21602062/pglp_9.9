@@ -67,4 +67,9 @@ public abstract class Forme {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	/**
+	 * Méthode affichant la forme sous forme de String
+	 */
+	public abstract String toString();
 }

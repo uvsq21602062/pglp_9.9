@@ -91,7 +91,7 @@
  					</descriptorRefs>
             		<archive>
              			<manifest>
-                			<mainClass>fr.uvsq.uvsq21602062.projet_maven.CalculatriceRPN</mainClass>
+                			<mainClass>fr.uvsq.uvsq21602062.projet_maven.DrawingApp</mainClass>
               			</manifest>
            			</archive>
           		</configuration>

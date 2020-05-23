@@ -41,4 +41,11 @@ public class Rectangle extends Forme{
 	public int getLargeur() {
 		return this.largeur;
 	}
+	
+	/**
+	 * Retourne le rectangle sous forme de String
+	 */
+	public String toString() {
+		return "Rectangle "+this.nom +", longueur = "+this.longueur+", largeur = "+this.largeur + ", x = "+this.x+", y = " + this.y;
+	}
 }

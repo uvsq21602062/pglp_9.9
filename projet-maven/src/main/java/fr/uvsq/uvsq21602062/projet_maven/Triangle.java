@@ -28,4 +28,11 @@ public class Triangle extends Forme {
 	public int getLongueur() {
 		return this.longueur;
 	}
+	
+	/**
+	 * Retrourne le triangle sous forme de String
+	 */
+	public String toString() {
+		return "Triangle "+this.nom+", l = "+this.longueur+", x = "+this.x+", y = "+this.y;
+	}
 }

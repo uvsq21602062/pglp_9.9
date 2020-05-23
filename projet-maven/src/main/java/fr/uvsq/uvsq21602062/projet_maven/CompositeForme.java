@@ -47,4 +47,12 @@ public class CompositeForme extends Forme {
 		f.setX(x);
 		f.setY(y);
 	}
+	
+	public String toString() {
+		String ret = "";
+		for(int i = 0; i < this.listeFormes.size(); i++) {
+			ret += listeFormes.get(i).toString() + "\n";
+		}
+		return ret;
+	}
 }
